@@ -2771,7 +2771,7 @@ class obj_world_stompfight(obj_world):
         # self.heroinvultimer=tool.obj_timer(40)# how long
         self.herov=0#total velocity
         self.herovj=0# added velocity from jump (changes during jump)
-        self.heroivj=4# initial velocity from jump (when starting jump)
+        self.heroivj=5# initial velocity from jump (when starting jump)
         self.herodvj=0.9# velocity factor loss (when holding jump)
         self.herovg=1#1 velocity from gravity
         self.heromx=12# move rate horizontally
@@ -3009,7 +3009,7 @@ class obj_world_stompfight(obj_world):
                     self.heromayholdjump=True# can hold this jump
                     self.heroholdjumptimer.start()
                 if self.heromayholdjump and controls.gu:# hold jump (hold button)
-                    self.herovj *= self.herodvj# factor jump velocity
+                    self.herovj *= self.herodvj**share.scl# factor jump velocity
                     self.herov -= self.herovj*share.scl
                     self.heroholdjumptimer.update()
                     if self.heroholdjumptimer.ring:
@@ -3236,9 +3236,9 @@ class obj_world_stompfight(obj_world):
                 if self.herokicking:
                     self.herokicktimer.update()
                     if self.herofaceright:
-                        self.hero.movex(self.heromxkick)
+                        self.hero.movex(self.heromxkick*share.scl)
                     else:
-                        self.hero.movex(-self.heromxkick)
+                        self.hero.movex(-self.heromxkick*share.scl)
                     if self.herokicktimer.ring:
                         self.herokicking=False
                         self.herofaceright = self.hero.x<self.villain.x# face the villain
@@ -3402,7 +3402,7 @@ class obj_world_climbpeak(obj_world):
         self.heromayholdjump=False# hero can hold to jump higher
         self.herov=0#total velocity
         self.herovj=0# added velocity from jump (changes during jump)
-        self.heroivj=4# initial velocity from jump (when starting jump)
+        self.heroivj=5#4# initial velocity from jump (when starting jump) WEB CHANGE
         self.herodvj=0.9# velocity factor loss (when holding jump)
         self.herovg=1.2#1 velocity from gravity
         self.heroholdjumptimer=tool.obj_timer(100)# how long can hold jump button
