@@ -11,7 +11,7 @@
 ##########################################################
 ##########################################################
 
-
+import asyncio# WEB
 import os
 # 1) change directory to current directory
 os.chdir(os.getcwd())
@@ -21,9 +21,11 @@ import share
 ##########################################################
 # Game Loop
 
-def main():
+async def main():# WEB
+# def main():
 
     while True:
+        await asyncio.sleep(0)# WEB
         share.scenemanager.update(share.controls)# (everything happens here)
         share.display.update()
         share.controls.update()
@@ -31,7 +33,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())# WEB
+    # main()
 
 ##########################################################
 ##########################################################
