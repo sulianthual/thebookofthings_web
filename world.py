@@ -3535,7 +3535,7 @@ class obj_world_climbpeak(obj_world):
                     self.heroholdjumptimer.start()
                     self.soundjump.play()
                 if self.heromayholdjump and controls.gu:# jump (hold button)
-                    self.herovj *= self.herodvj# factor jump velocity
+                    self.herovj *= self.herodvj**share.scl# factor jump velocity
                     self.herov -= self.herovj*share.scl
                     self.heroholdjumptimer.update()
                     if self.heroholdjumptimer.ring:
