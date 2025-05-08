@@ -2771,7 +2771,7 @@ class obj_world_stompfight(obj_world):
         # self.heroinvultimer=tool.obj_timer(40)# how long
         self.herov=0#total velocity
         self.herovj=0# added velocity from jump (changes during jump)
-        self.heroivj=5# initial velocity from jump (when starting jump)
+        self.heroivj=5#4# initial velocity from jump (when starting jump)# WEB MODIF
         self.herodvj=0.9# velocity factor loss (when holding jump)
         self.herovg=1#1 velocity from gravity
         self.heromx=12# move rate horizontally
@@ -2815,8 +2815,8 @@ class obj_world_stompfight(obj_world):
         self.villainmx=5#20# move rate horizontally
         self.villainxmin=150#200 area where will face to right
         self.villainxmax=1280-150# area where will face to left
-        self.villainmxjump=12#15 move rate when jumping
-        self.villain_vj0=-20# jump rate (initial)
+        self.villainmxjump=15#12# move rate when jumping # WEB MODIF
+        self.villain_vj0=-30#-20# jump rate (initial) # WEB MODIF
         self.villain_dv=0.7# jump rate increment (should go from positive to negative)
         self.villain_vj=self.villain_vj0# villain velocity v(t+dt)= v(t) + dv, v(0)=v0
         self.villainstaminamax=5# how many kicks before needs to rest
