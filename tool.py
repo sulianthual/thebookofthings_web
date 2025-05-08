@@ -155,7 +155,7 @@ class obj_timer:
     def update(self,*args):# update timer
         # print(self.t)
         if self.on:
-            self.t -= 3#1# 60 FPS->20 FPS
+            self.t -= 3#1# 60 FPS->20 FPS, DO ACCORDING TO SHARE.scl and SHARE.fps (1:60FPs, 3: 20FPS)
             if self.t <0:
                 self.on=False
                 self.ring=True
