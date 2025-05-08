@@ -24,9 +24,10 @@ import menu
 ##########################################################
 # Global parameters
 #
-fps=60# game fps (only supports 60, 30 and 20 fps, see draw.py/obj_animation)
+fps=20# game fps (only supports 60, 30 and 20 fps, see draw.py/obj_animation) #WEB=20
 colorkey=(128,0,128)# color used for transparency on images (purple)
-
+scl=60/fps# FPS SCALING for some speeds or movements (1 at 60 FPS, =3 at 20 FPS)
+# !!!! also edit tool.timer accordingly with SCALING
 
 # Global variables
 #

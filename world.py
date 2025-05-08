@@ -1076,8 +1076,8 @@ class obj_world_fishing(obj_world):
         self.hook.addpart( 'img_fish',draw.obj_image('fish',(640,100+50),scale=0.25,rotate=-90) )
         self.hook.dict['img_fish'].show=False
 
-        self.dydown=5
-        self.dyup=2
+        self.dydown=5*share.scl
+        self.dyup=2*share.scl
         # fish status
         self.fishfree=True# fish not caugth (yet)
         # fish animation
@@ -1164,8 +1164,8 @@ class obj_world_fishing_withgun(obj_world):
         self.hook.addpart( 'gun2',draw.obj_image('hookline',(80,self.ygun-390),path='data/premade') )
         self.hook.rx=60
         self.hook.ry=30
-        self.dydown=5
-        self.dyup=2
+        self.dydown=5*share.scl
+        self.dyup=2*share.scl
         # bullets
         # cannonballs
         self.cannonballs=[]# empty list
@@ -1226,7 +1226,7 @@ class obj_world_fishing_withgun(obj_world):
         cannonball.rx=30# hitbox
         cannonball.ry=30
         cannonball.r=1
-        cannonball.speed=12
+        cannonball.speed=12*share.scl
         self.cannonballs.append(cannonball)
     def killcannonball(self,cannonball):
         self.cannonballs.remove(cannonball)
@@ -1237,7 +1237,7 @@ class obj_world_fishing_withgun(obj_world):
         lightball.rx=30# hitbox
         lightball.ry=30
         lightball.r=1
-        lightball.speed=-6#-12
+        lightball.speed=-6*share.scl#-12
         self.lightballs.append(lightball)
     def killlightball(self,lightball):
         self.lightballs.remove(lightball)
@@ -2101,7 +2101,7 @@ class obj_world_travel(obj_world):
 
         self.herowalktimer=tool.obj_timer(10)# timer to alternate walk slides
         self.herowalkframe1=True# alternate True/False for two frames
-        self.herospeed=6# hero walking speed
+        self.herospeed=6*share.scl# hero walking speed
         self.heromx=self.herospeed# moving rate
         self.heromy=self.herospeed# moving rate
         # goal(s) to reach
@@ -2554,7 +2554,7 @@ class obj_world_dodgegunshots(obj_world):
         cannonball.rx=15# hitbox
         cannonball.ry=15
         cannonball.r=15
-        cannonball.speed=12#8#tool.randint(2,8)
+        cannonball.speed=12*share.scl#8#tool.randint(2,8)
         self.cannonballs.append(cannonball)
     def killcannonball(self,cannonball):
         self.cannonballs.remove(cannonball)
@@ -2570,14 +2570,14 @@ class obj_world_dodgegunshots(obj_world):
             # goal unreached state
             # hero dynamics
             self.herofy=0# force
-            self.herofy += self.herog# gravity
+            self.herofy += self.herog*share.scl# gravity
             if self.heromayjump and (controls.gu and controls.guc):# jump
                 self.soundjump.play()
                 self.herofy -= self.heroj
                 self.herov=0# reset velocity
                 self.heromayjump=False# cant jump again
             # hero dynamics
-            self.herov += self.herodt*(self.herofy-self.herod*self.herov)# dtv=g+flap-dv**2
+            self.herov += self.herodt*(self.herofy-self.herod*self.herov)*share.scl# dtv=g+flap-dv**2
             self.hero.movey(self.herodt*self.herov)# dty=v
             # boundaries
             if self.hero.y>self.ymax:
@@ -3010,7 +3010,7 @@ class obj_world_stompfight(obj_world):
                     self.heroholdjumptimer.start()
                 if self.heromayholdjump and controls.gu:# hold jump (hold button)
                     self.herovj *= self.herodvj# factor jump velocity
-                    self.herov -= self.herovj
+                    self.herov -= self.herovj*share.scl
                     self.heroholdjumptimer.update()
                     if self.heroholdjumptimer.ring:
                         self.heromayholdjump=False
@@ -3022,7 +3022,7 @@ class obj_world_stompfight(obj_world):
                     #
                     # hero dynamics x (always true except if hurt)
                     if controls.gl:#
-                        self.hero.movex(-self.heromx)
+                        self.hero.movex(-self.heromx*share.scl)
                         if controls.glc:# flip left
                             self.herofaceright=False
                             self.hero.dict['stand_right'].show=False
@@ -3030,7 +3030,7 @@ class obj_world_stompfight(obj_world):
                             self.hero.dict['hurt'].show=False
                             self.hero.dict['hurttext'].show=False
                     if controls.gr:#
-                        self.hero.movex(self.heromx)
+                        self.hero.movex(self.heromx*share.scl)
                         if controls.grc:# flip right
                             self.herofaceright=True
                             self.hero.dict['stand_right'].show=True
@@ -3049,9 +3049,9 @@ class obj_world_stompfight(obj_world):
                 else:# kicking
                     self.herokicktimer.update()
                     if self.herofaceright:
-                        self.hero.movex(self.heromxkick)
+                        self.hero.movex(self.heromxkick*share.scl)
                     else:
-                        self.hero.movex(-self.heromxkick)
+                        self.hero.movex(-self.heromxkick*share.scl)
                     if self.herokicktimer.ring:
                         self.herokicking=False
                         self.hero.dict['kick_right'].show=False
@@ -3073,8 +3073,8 @@ class obj_world_stompfight(obj_world):
                     self.herohurt=False
 
             # fall (even if hurt)
-            self.herov += self.herovg# gravity
-            self.hero.movey(self.herov)# dty=v (dt=1)
+            self.herov += self.herovg*share.scl# gravity
+            self.hero.movey(self.herov*share.scl)# dty=v (dt=1)
             if self.hero.y>self.yground:# hero is on ground
                 self.herojumping=False
                 self.hero.movetoy(self.yground)
@@ -3104,9 +3104,9 @@ class obj_world_stompfight(obj_world):
                 elif self.villainstate=='kick':
                     # kick one direction
                     if self.villainfaceright:
-                        self.villain.movex(self.villainmx)
+                        self.villain.movex(self.villainmx*share.scl)
                     else:
-                        self.villain.movex(-self.villainmx)
+                        self.villain.movex(-self.villainmx*share.scl)
                     self.villaintimerkick.update()
                     if self.villaintimerkick.ring:# kick, to stand or rest
                         if self.villainstamina<0:# if out of stamina
@@ -3126,11 +3126,11 @@ class obj_world_stompfight(obj_world):
                 elif self.villainstate=='jump':
                     # jump one direction
                     if self.villainjumpright:
-                        self.villain.movex(self.villainmxjump)
+                        self.villain.movex(self.villainmxjump*share.scl)
                     else:
-                        self.villain.movex(-self.villainmxjump)
+                        self.villain.movex(-self.villainmxjump*share.scl)
                     self.villain.movey(self.villain_vj)
-                    self.villain_vj += self.villain_dv
+                    self.villain_vj += self.villain_dv*share.scl
                     if self.villain.y>self.yground-12:
                         self.villain.movetoy(self.yground-12)
                     self.villaintimerjump.update()
@@ -3254,8 +3254,8 @@ class obj_world_stompfight(obj_world):
 
 
             # hero fall (even if already dead/won)
-            self.herov += self.herovg# gravity
-            self.hero.movey(self.herov)# dty=v (dt=1)
+            self.herov += self.herovg*share.scl# gravity
+            self.hero.movey(self.herov*share.scl)# dty=v (dt=1)
             if self.hero.y>self.yground:# hero is on ground
                 self.hero.movetoy(self.yground)
                 self.herov = 0# just stall
@@ -3536,11 +3536,11 @@ class obj_world_climbpeak(obj_world):
                     self.soundjump.play()
                 if self.heromayholdjump and controls.gu:# jump (hold button)
                     self.herovj *= self.herodvj# factor jump velocity
-                    self.herov -= self.herovj
+                    self.herov -= self.herovj*share.scl
                     self.heroholdjumptimer.update()
                     if self.heroholdjumptimer.ring:
                         self.heromayholdjump=False
-                self.herov += self.herovg# gravity
+                self.herov += self.herovg*share.scl# gravity
                 # ground
                 if self.hero.y+self.herov>self.yground:# hero is on ground
                     if self.level<2:# first level, ground is hard
@@ -3558,15 +3558,15 @@ class obj_world_climbpeak(obj_world):
                         self.herov=min(0,self.herov)# positive
                         self.heromayjump=True# may jump from ground again
                 # apply movement
-                self.hero.movey(self.herov)# dty=v
+                self.hero.movey(self.herov*share.scl)# dty=v
                 # hero dynamics x
                 if controls.gl:#
-                    self.hero.movex(-self.heromx)
+                    self.hero.movex(-self.heromx*share.scl)
                     if controls.glc:# flip left
                         self.hero.dict['stand_right'].show=False
                         self.hero.dict['stand_left'].show=True
                 if controls.gr:
-                    self.hero.movex(self.heromx)
+                    self.hero.movex(self.heromx*share.scl)
                     if controls.grc:# flip right
                         self.hero.dict['stand_right'].show=True
                         self.hero.dict['stand_left'].show=False
@@ -3889,12 +3889,12 @@ class obj_world_masterthescissors(obj_world):
             self.timer_kick.start()
         # Evolving force
         if pushing==0:
-            self.force_gravi*=self.force_gravidtmult
+            self.force_gravi*=self.force_gravidtmult**share.scl
         else:
             self.force_gravi=self.force_gravi0
         self.force_gravi=min([self.force_gravi,self.force_gravimax])
         # Apply movement
-        self.posi_ynow+=pushing*self.force_push+self.force_gravi
+        self.posi_ynow+=pushing*self.force_push*share.scl+self.force_gravi*share.scl
         self.posi_ynow=min([self.posi_ynow,self.posi_ymin])
         self.posi_ynow=max([self.posi_ynow,self.posi_ymax])
         self.hero.movetoy(self.posi_ynow)
@@ -4474,7 +4474,7 @@ class obj_grandactor_bushstealthskeleton(obj_grandactor):
         self.faceright=True# looking right or left
         self.timer=tool.obj_timer(50)# timer for switch states (first switch is quick)
         self.timer.start()
-        self.mx=3# move rate
+        self.mx=3*share.scl# move rate
         self.minvision=100# vision min distance (must be >)
         self.maxvision=500# vision max distance (must be <)
         # images
@@ -4691,13 +4691,13 @@ class obj_world_bushstealth(obj_world):
         self.hero.dict['moving'].show=False
         self.hero.dict['movingspark'].show=False
         self.hero.dict['standing'].show=True
-        self.heromx=5# move rate
+        self.heromx=5*share.scl# move rate
         self.heroxmin=100# boundaries
         self.heroxmax=1280-100
         self.herostanding=True# hero is standing or moving
         self.busted=False# hero has been busted
         self.xwin=1280-110# location to reach (with +-10)
-        self.heromxwin=5# move rate (and direction) for animation when winning
+        self.heromxwin=5*share.scl# move rate (and direction) for animation when winning
         # skeleton(s)
         self.makeskeletons()
         # text
@@ -4959,8 +4959,8 @@ class obj_world_ridecow(obj_world):
         self.hero.dict['hurt'].show=False
         self.hero.rx=25
         self.hero.ry=30#75#50# REDUCED
-        self.heromx=5# move rate
-        self.heromy=7#
+        self.heromx=5*share.scl# move rate
+        self.heromy=7*share.scl#
         self.heroxmin=300# boundaries
         self.heroxmax=1280-200
         self.heroymin=50
@@ -4976,7 +4976,7 @@ class obj_world_ridecow(obj_world):
         self.shooting=True# shoot new ones or not
         self.shots=[]# empty list
         self.shottimer=tool.obj_timer(10)#tool.obj_timer(20)# time between obstacles
-        self.runspeed=12#8#7#5# moving speed of background and obstacles
+        self.runspeed=12*share.scl#8#7#5# moving speed of background and obstacles
         self.shottimer.start()
         self.shotx0=1280+200
         self.shoty0min=self.heroymin-50
@@ -5011,8 +5011,8 @@ class obj_world_ridecow(obj_world):
         # timer for done part
         self.timerendwin=tool.obj_timer(180)# goal to done
         self.timerendloose=tool.obj_timer(180)# goal to done
-        self.loosemx=7# skeleton move rate if loose
-        self.winmx=3# hero move rate if wins
+        self.loosemx=7*share.scl# skeleton move rate if loose
+        self.winmx=3*share.scl# hero move rate if wins
         # text
         self.text_undone.addpart( 'text1', draw.obj_textbox('['+share.datamanager.controlname('arrows')+']: move',(640,660),color=share.colors.instructions) )
         self.text_undone.addpart( 'progress', draw.obj_textbox('0%',(1090,640)) )
@@ -6787,8 +6787,8 @@ class obj_world_3dforest(obj_world):
                     if self.zp>0:
                         self.zp-=0.014
                     # Look
-                    if controls.gr: self.op-=1.5
-                    if controls.gl: self.op+=1.5
+                    if controls.gr: self.op-=1.5*share.scl
+                    if controls.gl: self.op+=1.5*share.scl
                     # agonize
                     self.timerplayerdie.update()
                     if self.timerplayerdie.ring:
@@ -6804,38 +6804,38 @@ class obj_world_3dforest(obj_world):
                 # Update player coordinates
                 if True:# Look and Move with keys
                     if controls.gr and not controls.gl:
-                        self.op-=self.dop
+                        self.op-=self.dop*share.scl
                         self.dop=min(1.05*(self.dop+0.1),1.5)
                     elif controls.gl and not controls.gr:
-                        self.op+=self.dop
+                        self.op+=self.dop*share.scl
                         self.dop=min(1.05*(self.dop+0.1),1.5)
                     else:
                         self.dop=0
                     # Move
                     if controls.gu:
-                        self.xp+=0.06*tool.cos(self.op)
-                        self.yp+=0.06*tool.sin(self.op)
+                        self.xp+=0.06*tool.cos(self.op)*share.scl
+                        self.yp+=0.06*tool.sin(self.op)*share.scl
                     if controls.gd:
-                        self.xp+=-0.06*tool.cos(self.op)
-                        self.yp+=-0.06*tool.sin(self.op)
+                        self.xp+=-0.06*tool.cos(self.op)*share.scl
+                        self.yp+=-0.06*tool.sin(self.op)*share.scl
                 else:# look with mouse 1,2 strafe with keys, shoot with space
                     # Look
                     if controls.gm2: self.op-=1.5
                     if controls.gm1: self.op+=1.5
                     # Strafe
                     if controls.gr:
-                        self.xp+=0.03*tool.sin(self.op)
-                        self.yp+=-0.03*tool.cos(self.op)
+                        self.xp+=0.03*tool.sin(self.op)*share.scl
+                        self.yp+=-0.03*tool.cos(self.op)*share.scl
                     if controls.gl:
-                        self.xp+=-0.03*tool.sin(self.op)
-                        self.yp+=0.03*tool.cos(self.op)
+                        self.xp+=-0.03*tool.sin(self.op)*share.scl
+                        self.yp+=0.03*tool.cos(self.op)*share.scl
                     # Move
                     if controls.gu:
-                        self.xp+=0.06*tool.cos(self.op)
-                        self.yp+=0.06*tool.sin(self.op)
+                        self.xp+=0.06*tool.cos(self.op)*share.scl
+                        self.yp+=0.06*tool.sin(self.op)*share.scl
                     if controls.gd:
-                        self.xp+=-0.06*tool.cos(self.op)
-                        self.yp+=-0.06*tool.sin(self.op)
+                        self.xp+=-0.06*tool.cos(self.op)*share.scl
+                        self.yp+=-0.06*tool.sin(self.op)*share.scl
                 # Manage Gun
                 if self.hasgun:
                     # delay between shots
@@ -6965,30 +6965,30 @@ class obj_world_3dforest(obj_world):
                             # move laterally but much faster
                             arate=0.01*lt
                             if act.fliph3d:
-                                act.x3d-=arate*tool.sin(ot)
-                                act.y3d+=arate*tool.cos(ot)
+                                act.x3d-=arate*tool.sin(ot)*share.scl
+                                act.y3d+=arate*tool.cos(ot)*share.scl
                             else:
-                                act.x3d+=arate*tool.sin(ot)
-                                act.y3d-=arate*tool.cos(ot)
+                                act.x3d+=arate*tool.sin(ot)*share.scl
+                                act.y3d-=arate*tool.cos(ot)*share.scl
                             # back up if too close
                             if lt>5:
                                 # moves towards the player
-                                act.x3d-=0.01*tool.cos(ot)
-                                act.y3d-=0.01*tool.sin(ot)
+                                act.x3d-=0.01*tool.cos(ot)*share.scl
+                                act.y3d-=0.01*tool.sin(ot)*share.scl
                             elif lt<2.5:
                                 # moves back from the player (very slow)
-                                act.x3d+=0.005*tool.cos(ot)
-                                act.y3d+=0.005*tool.sin(ot)
+                                act.x3d+=0.005*tool.cos(ot)*share.scl
+                                act.y3d+=0.005*tool.sin(ot)*share.scl
                             else:
                                 # moves towards the player (extremely slowly)
-                                act.x3d-=0.001*tool.cos(ot)
-                                act.y3d-=0.001*tool.sin(ot)
+                                act.x3d-=0.001*tool.cos(ot)*share.scl
+                                act.y3d-=0.001*tool.sin(ot)*share.scl
                         else:
                             # Within vision of player
                             if lt>2:# moves slowly towards player
                                 # moves towards the player
-                                act.x3d-=0.01*tool.cos(ot)
-                                act.y3d-=0.01*tool.sin(ot)
+                                act.x3d-=0.01*tool.cos(ot)*share.scl
+                                act.y3d-=0.01*tool.sin(ot)*share.scl
 
                                 # move laterally (depending on its fliph)
                                 if lt>3:
@@ -6996,11 +6996,11 @@ class obj_world_3dforest(obj_world):
                                 else:
                                     arate=0.005
                                 if act.fliph3d:
-                                    act.x3d-=arate*tool.sin(ot)
-                                    act.y3d+=arate*tool.cos(ot)
+                                    act.x3d-=arate*tool.sin(ot)*share.scl
+                                    act.y3d+=arate*tool.cos(ot)*share.scl
                                 else:
-                                    act.x3d+=arate*tool.sin(ot)
-                                    act.y3d-=arate*tool.cos(ot)
+                                    act.x3d+=arate*tool.sin(ot)*share.scl
+                                    act.y3d-=arate*tool.cos(ot)*share.scl
                                 # small random chance of fliph
                                 randfliphrabb_=tool.randint(0,500)
                                 if randfliphrabb_>500-2:
@@ -7015,8 +7015,8 @@ class obj_world_3dforest(obj_world):
                     else:# is attacking
                         if not act.isreloading:
                             if lt>0.5:# sprint towards player (but keep initial direction)
-                                act.x3d-=0.02*tool.cos(act.attackangle)
-                                act.y3d-=0.02*tool.sin(act.attackangle)
+                                act.x3d-=0.02*tool.cos(act.attackangle)*share.scl
+                                act.y3d-=0.02*tool.sin(act.attackangle)*share.scl
                                 act.timer3d.update()
                                 if act.timer3d.ring:# finish attack
                                     act.isattacking=False
@@ -7035,15 +7035,15 @@ class obj_world_3dforest(obj_world):
                                     self.killplayer()
                         else:# is reloading (after succesfull attack)
                             # moves back from player
-                            act.x3d+=0.01*tool.cos(ot)
-                            act.y3d+=0.01*tool.sin(ot)
+                            act.x3d+=0.01*tool.cos(ot)*share.scl
+                            act.y3d+=0.01*tool.sin(ot)*share.scl
                             # move laterally (depending on its fliph)
                             if act.fliph3d:
-                                act.x3d-=0.007*tool.sin(ot)
-                                act.y3d+=0.007*tool.cos(ot)
+                                act.x3d-=0.007*tool.sin(ot)*share.scl
+                                act.y3d+=0.007*tool.cos(ot)*share.scl
                             else:
-                                act.x3d+=0.007*tool.sin(ot)
-                                act.y3d-=0.007*tool.cos(ot)
+                                act.x3d+=0.007*tool.sin(ot)*share.scl
+                                act.y3d-=0.007*tool.cos(ot)*share.scl
                             act.timer3d.update()
                             if act.timer3d.ring:# finish attack
                                 act.isattacking=False# return to non attack state
@@ -7068,30 +7068,30 @@ class obj_world_3dforest(obj_world):
                             # move laterally but much faster
                             arate=0.01*lt
                             if act.fliph3d:
-                                act.x3d-=arate*tool.sin(ot)
-                                act.y3d+=arate*tool.cos(ot)
+                                act.x3d-=arate*tool.sin(ot)*share.scl
+                                act.y3d+=arate*tool.cos(ot)*share.scl
                             else:
-                                act.x3d+=arate*tool.sin(ot)
-                                act.y3d-=arate*tool.cos(ot)
+                                act.x3d+=arate*tool.sin(ot)*share.scl
+                                act.y3d-=arate*tool.cos(ot)*share.scl
                             # back up if too close
                             if lt>5:
                                 # moves towards the player
-                                act.x3d-=0.01*tool.cos(ot)
-                                act.y3d-=0.01*tool.sin(ot)
+                                act.x3d-=0.01*tool.cos(ot)*share.scl
+                                act.y3d-=0.01*tool.sin(ot)*share.scl
                             elif lt<2.5:
                                 # moves back from the player
-                                act.x3d+=0.04*tool.cos(ot)
-                                act.y3d+=0.04*tool.sin(ot)
+                                act.x3d+=0.04*tool.cos(ot)*share.scl
+                                act.y3d+=0.04*tool.sin(ot)*share.scl
                             else:
                                 # moves towards the player (extremely slowly)
-                                act.x3d-=0.001*tool.cos(ot)
-                                act.y3d-=0.001*tool.sin(ot)
+                                act.x3d-=0.001*tool.cos(ot)*share.scl
+                                act.y3d-=0.001*tool.sin(ot)*share.scl
                         else:
                             # Within vision of player
                             if lt>2:# moves slowly towards player
                                 # moves towards the player
-                                act.x3d-=0.01*tool.cos(ot)
-                                act.y3d-=0.01*tool.sin(ot)
+                                act.x3d-=0.01*tool.cos(ot)*share.scl
+                                act.y3d-=0.01*tool.sin(ot)*share.scl
 
                                 # move laterally (depending on its fliph)
                                 if lt>3:
@@ -7099,11 +7099,11 @@ class obj_world_3dforest(obj_world):
                                 else:
                                     arate=0.005
                                 if act.fliph3d:
-                                    act.x3d-=arate*tool.sin(ot)
-                                    act.y3d+=arate*tool.cos(ot)
+                                    act.x3d-=arate*tool.sin(ot)*share.scl
+                                    act.y3d+=arate*tool.cos(ot)*share.scl
                                 else:
-                                    act.x3d+=arate*tool.sin(ot)
-                                    act.y3d-=arate*tool.cos(ot)
+                                    act.x3d+=arate*tool.sin(ot)*share.scl
+                                    act.y3d-=arate*tool.cos(ot)*share.scl
                                 # small random chance of fliph
                                 randfliphrabb_=tool.randint(0,500)
                                 if randfliphrabb_>500-2:
@@ -7118,8 +7118,8 @@ class obj_world_3dforest(obj_world):
                     else:# is attacking
                         if not act.isreloading:
                             if lt>0.5:# sprint towards player (but keep initial direction)
-                                act.x3d-=0.02*tool.cos(act.attackangle)
-                                act.y3d-=0.02*tool.sin(act.attackangle)
+                                act.x3d-=0.02*tool.cos(act.attackangle)*share.scl
+                                act.y3d-=0.02*tool.sin(act.attackangle)*share.scl
                                 act.timer3d.update()
                                 if act.timer3d.ring:# finish attack
                                     act.isattacking=False
@@ -7138,15 +7138,15 @@ class obj_world_3dforest(obj_world):
                                     self.killplayer()
                         else:# is reloading (after succesfull attack)
                             # moves back from player
-                            act.x3d+=0.01*tool.cos(ot)
-                            act.y3d+=0.01*tool.sin(ot)
+                            act.x3d+=0.01*tool.cos(ot)*share.scl
+                            act.y3d+=0.01*tool.sin(ot)*share.scl
                             # move laterally (depending on its fliph)
                             if act.fliph3d:
-                                act.x3d-=0.007*tool.sin(ot)
-                                act.y3d+=0.007*tool.cos(ot)
+                                act.x3d-=0.007*tool.sin(ot)*share.scl
+                                act.y3d+=0.007*tool.cos(ot)*share.scl
                             else:
-                                act.x3d+=0.007*tool.sin(ot)
-                                act.y3d-=0.007*tool.cos(ot)
+                                act.x3d+=0.007*tool.sin(ot)*share.scl
+                                act.y3d-=0.007*tool.cos(ot)*share.scl
                             act.timer3d.update()
                             if act.timer3d.ring:# finish attack
                                 act.isattacking=False# return to non attack state

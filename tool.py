@@ -155,7 +155,7 @@ class obj_timer:
     def update(self,*args):# update timer
         # print(self.t)
         if self.on:
-            self.t -= 1
+            self.t -= 3#1# 60 FPS->20 FPS
             if self.t <0:
                 self.on=False
                 self.ring=True
