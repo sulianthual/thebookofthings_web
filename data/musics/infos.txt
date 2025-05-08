@@ -1,0 +1,28 @@
+###############################
+Musics:
+
+All from PlayOnLoop.com
+
+Credit example 1:
+Background music from PlayOnLoop.com
+Licensed under Creative Commons by Attribution 4.0
+
+Credit example 2:
+Music: “Galactic Trek”, from PlayOnLoop.com
+Licensed under Creative Commons by Attribution 4.0
+
+Note:
+
+1) from the website these wav are in 32 bit pcm. They dont work with some pygame versions (e.g. 1.9.6)
+for compatibility may convert them to wav 16 bit (in folder dats):
+for i in *.wav; do ffmpeg -i "$i" -f wav dats/"${i%.*}.wav"; done
+there is still inconsistencies where files play at different speeds depending on pygame version
+
+2) the mp3 do not work with never pygame version 2.0.0 
+
+3) safest for compatibility is to convert everything to .ogg (in folder dats):
+for i in *.wav; do ffmpeg -i "$i" -f ogg dats/"${i%.*}.ogg"; done
+
+4) compiling for windows, oggs are NOT READ (this is a pygame/pyinstaller problem)
+   so we are reconverted all files to wav
+###############################
