@@ -29,6 +29,8 @@ from random import choices as random_randchoice# choices not choice
 from random import sample as random_randsample
 from random import gauss as random_randgauss
 
+import share## WEB VERSION
+
 ##########################################################
 ##########################################################
 # Calls to external modules
@@ -142,6 +144,7 @@ class obj_timer:
 
         self.t=0# countdown time
         self.cycle=cycle# timer cycles (restarts automatically when done)
+        self.trate=1*share.scl## WEB
     def start(self,amount=None):# start (or restart) timer
         if amount:
             self.t=round(amount)# change duration only for this countdown
@@ -155,7 +158,7 @@ class obj_timer:
     def update(self,*args):# update timer
         # print(self.t)
         if self.on:
-            self.t -= 3#1# 60 FPS->20 FPS, DO ACCORDING TO SHARE.scl and SHARE.fps (1:60FPs, 3: 20FPS)
+            self.t -= self.trate#1# 60 FPS->20 FPS, DO ACCORDING TO SHARE.scl and SHARE.fps (1:60FPs, 3: 20FPS)
             if self.t <0:
                 self.on=False
                 self.ring=True
