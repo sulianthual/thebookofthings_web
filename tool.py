@@ -132,6 +132,12 @@ def checkrectcollide(a,b):
 def comparestringparts(a,b):
     return [c for c in a.lower() if c.isalpha()] == [c for c in b.lower() if c.isalpha()]
 
+def check_common_element(arr1, arr2):# check if any element of arr1 in arr2 (WEB)
+    for element in arr1:
+        if element in arr2:
+            return True
+    return False
+
 # Timer for any purpose
 class obj_timer:
     def __init__(self,amount,cycle=False):

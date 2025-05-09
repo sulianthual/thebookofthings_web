@@ -1226,14 +1226,33 @@ class obj_animation:
                             self.soundonloop=True
             else:# no silent loops at all
                 self.soundonloop=True
+            ## IF FPS=20 or 30 FPS, must detect within a range of ta
             if self.soundonloop:
-                for i in self.sounddict_frames.keys():
-                    if self.sounddict_islist[i]:# list of frames
-                        if ta in self.sounddict_frames[i]:
-                            self.sounddict[i].play()
-                    else:# single frame
-                        if ta ==self.sounddict_frames[i]:
-                            self.sounddict[i].play()
+                if share.fps==60:
+                    for i in self.sounddict_frames.keys():
+                        if self.sounddict_islist[i]:# list of frames
+                            if ta in self.sounddict_frames[i]:
+                                self.sounddict[i].play()
+                        else:# single frame
+                            if ta ==self.sounddict_frames[i]:
+                                self.sounddict[i].play()
+                elif share.fps==30:
+                    for i in self.sounddict_frames.keys():
+                        if self.sounddict_islist[i]:# list of frames
+                            if ta in self.sounddict_frames[i] or ta-1 in self.sounddict_frames[i]:
+                                self.sounddict[i].play()
+                        else:# single frame
+                            if ta ==self.sounddict_frames[i] or ta-1 ==self.sounddict_frames[i]:
+                                self.sounddict[i].play()
+                elif share.fps==20:
+                    for i in self.sounddict_frames.keys():
+                        if self.sounddict_islist[i]:# list of frames
+                            if ta in self.sounddict_frames[i] or ta-1 in self.sounddict_frames[i] or ta-2 in self.sounddict_frames[i]:
+                                self.sounddict[i].play()
+                        else:# single frame
+                            if ta ==self.sounddict_frames[i] or ta-1 ==self.sounddict_frames[i] or ta-2 ==self.sounddict_frames[i]:
+                                self.sounddict[i].play()
+
     def devtools(self):
         if self.sequence.recording:
             if self.sequence.data and len(self.sequence.data)>1:
