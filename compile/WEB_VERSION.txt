@@ -9,8 +9,11 @@ modified code, 60 FPS to 20 FPS:
 - animations (draw/obj_animation) now play 1/3 frame. Sound during animation modified (detect sound within last 3 frames)
 - other modifs i dont remember maybe
 
+Added controls for page browsing (see page.py, chapter_page):
+- Enter=next, tab=previous. Enter if [Next] if available
+
 Making the build:
 https://github.com/pygame-web/pygbag
 https://pygame-web.github.io/
 Command line (archive for itch.io build):
-pygbag --archive thebookofthings_dev
+pygbag --archive --title TheBookofThings thebookofthings_web

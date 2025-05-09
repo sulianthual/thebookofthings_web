@@ -42,7 +42,7 @@ class obj_quickscene():
             # regular scenes
             #
             # quickscene=obj_scene_settings()
-            # quickscene=obj_scene_instructions_controls_screen()
+            quickscene=obj_scene_instructions_controls_screen()
 
             # quickscene=ch0.obj_scene_prologue()
             # quickscene=ch0.obj_scene_ch0p13b()
@@ -60,7 +60,7 @@ class obj_quickscene():
             # quickscene=ch3.obj_scene_ch3p31()
             # quickscene=ch3.obj_scene_ch3p30c()
             # quickscene=ch3.obj_scene_ch3p22easteregg()
-            quickscene=ch4.obj_scene_ch4p10c()
+            # quickscene=ch4.obj_scene_ch4p10c()
             # quickscene=ch4.obj_scene_ch4p16g()
 
             # quickscene=ch5.obj_scene_ch5p6()

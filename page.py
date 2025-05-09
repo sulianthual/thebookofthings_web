@@ -168,10 +168,13 @@ class obj_chapterpage(obj_page):
         self.callexitpage(controls)
     # first level (may customize for pages, e.g. if minigame)
     def triggerprevpage(self,controls):
-        return False
+        # return False# PREV
+        return (controls.tab and controls.tabc)
         # return self.textbox_prev.isclicked(controls)
     def triggernextpage(self,controls):
-        return self.textbox_next.isclicked(controls)
+        # return self.textbox_next.isclicked(controls)# PREV
+        ## NEW WEB: enter shortcut if textbox_next exists
+        return self.textbox_next.isclicked(controls) or (self.dotextboxnextpage and self.textbox_next.text=="[next]" and controls.enter and controls.enterc)
     def triggerexitpage(self,controls):
         return controls.gq and controls.gqc
     # second level (required in rare cases)
