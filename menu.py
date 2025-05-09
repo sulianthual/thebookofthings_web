@@ -856,7 +856,17 @@ class obj_scene_realtitlescreen(page.obj_page):
         #
         # Main
         self.textboxtitle=draw.obj_textbox('The Book of Things',(640,80),fontsize='big')
+
         self.addpart(self.textboxtitle)
+        if tool.is_web():# WEB
+            ## MESSAGE
+            # self.addpart(draw.obj_textbox('(web version)',(640,145),fontsize='small',color=share.colors.red))
+            self.addpart(draw.obj_textbox('web version: all drawings and progress will be erased when closing the page',(640,680),fontsize="smaller",color=share.colors.red))
+            ## BUTTONS FOR WEB SAVE/LOAD (EXPERIMENTAL)
+            # self.sprite_websave=draw.obj_textbox('save',(640,600),fontsize="small",hover=True,color=share.colors.red)
+            # self.addpart(self.sprite_websave)
+            # self.sprite_webload=draw.obj_textbox('load',(640,640),fontsize="small",hover=True,color=share.colors.red)
+            # self.addpart(self.sprite_webload)
         #
         self.doswapdeco=self.hasbook and self.maxchapter>3
         # self.textboxswapdeco=draw.obj_textbox('*',(20,30),fontsize='medium',hover=self.hasbook)
@@ -912,9 +922,16 @@ class obj_scene_realtitlescreen(page.obj_page):
 
     def page(self,controls):
         #
+        # WEB
+        if tool.is_web():
+            if self.sprite_websave.isclicked(controls):
+                tool.save_all_web_images()
+            elif self.sprite_webload.isclicked(controls):
+                tool.load_all_web_images()
+
         # Hovering
         if not self.hasbook:
-            if self.sprite_continue.isclicked(controls):
+            if self.sprite_continue.isclicked(controls) or (controls.enter and controls.enterc):
                 self.sound_menugo.play()
                 share.scenemanager.switchscene(obj_scene_chaptersscreen())# still go to chapters
                 # share.scenemanager.switchscene(ch0.obj_scene_prologue())# directly to start of prologue

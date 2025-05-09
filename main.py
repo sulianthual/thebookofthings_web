@@ -31,9 +31,8 @@ async def main():# WEB
         share.controls.update()
         share.clock.update()
 
-
 if __name__ == '__main__':
-    asyncio.run(main())# WEB
+    asyncio.run(main())# WEB (also works as regular session)
     # main()
 
 ##########################################################

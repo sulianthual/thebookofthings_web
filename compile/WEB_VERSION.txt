@@ -14,6 +14,10 @@ Added controls for page browsing (see page.py, chapter_page):
 - Modified control display page (ch0 and menu)
 - may now skip some games, beware if logic still ok
 - menu.py: enter now goes to chapter page, Enter again goes to last available chapter, tab goes back
+- modif text ch0 to reflect tab/esc
+
+Web Save:
+- tried saving/loading web content from the menu, but gave up (see additions in menu.py and tool.py)
 
 Making the build:
 https://github.com/pygame-web/pygbag

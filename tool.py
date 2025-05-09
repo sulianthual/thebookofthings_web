@@ -15,6 +15,7 @@
 ##########################################################
 ##########################################################
 
+import sys# WEB
 from sys import exit as sys_exit
 from os import path as os_path
 from os import listdir as os_listdir
@@ -29,9 +30,47 @@ from random import choices as random_randchoice# choices not choice
 from random import sample as random_randsample
 from random import gauss as random_randgauss
 
-import share## WEB VERSION
+
 
 ##########################################################
+##########################################################
+## WEB
+
+import share## WEB VERSION
+import platform
+
+def is_web():# is platform web? WEB
+    return sys.platform == "emscripten"
+
+import base64
+
+def get_image_as_base64(image_path):# convert an image to a base64 string
+    try:
+        with open(image_path, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
+            return encoded_string.decode('utf-8')
+    except:
+        return None
+
+def save_image_from_base64(base64_string, file_path):
+    try:
+        image_data = base64.b64decode(base64_string)
+        if image_data is not None:
+            with open(file_path, "wb") as file:
+                file.write(image_data)
+    except:
+        pass
+
+def save_all_web_images():
+    image_path = "./book/pen.png"
+    base64_string = get_image_as_base64(image_path)
+    platform.window.localStorage.setItem("pen", base64_string )
+
+def load_all_web_images():
+    base64_string = platform.window.localStorage.getItem("pen")
+    image_path = "./book/pen.png"
+    save_image_from_base64(base64_string, image_path)
+
 ##########################################################
 # Calls to external modules
 
