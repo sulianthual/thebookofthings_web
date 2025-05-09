@@ -1,0 +1,16 @@
+web version (2025):
+
+
+modified code, 60 FPS to 20 FPS:
+- 60 FPS was not consistently attained on web version
+- share.py: fps and scl (scl=3 for 20 FPS)
+- share.scl used for modifying physics (world.py), as well as tool/timer (tool now import share)
+- Some minigames parameters adjusted manually (typically jumping initial rate, as was inconsistent with only share.scl)
+- animations (draw/obj_animation) now play 1/3 frame. Sound during animation modified (detect sound within last 3 frames)
+- other modifs i dont remember maybe
+
+Making the build:
+https://github.com/pygame-web/pygbag
+https://pygame-web.github.io/
+Command line (archive for itch.io build):
+pygbag --archive thebookofthings_dev
