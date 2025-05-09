@@ -2,4 +2,4 @@
 
 <h4>thebookofthings_web</h4>
 
-The Book of Things (web version). sul (2025). Github reference: [link](https://github.com/sulianthual/thebookofthings_web)
+The Book of Things (web version using pygbag). sul (2025). Github reference: [link](https://github.com/sulianthual/thebookofthings_web)

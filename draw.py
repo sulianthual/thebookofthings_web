@@ -1226,7 +1226,7 @@ class obj_animation:
                             self.soundonloop=True
             else:# no silent loops at all
                 self.soundonloop=True
-            ## IF FPS=20 or 30 FPS, must detect within a range of ta
+            ## IF FPS=20 or 30 FPS, must detect within a range of ta (as we skip frames within animation)
             if self.soundonloop:
                 if share.fps==60:
                     for i in self.sounddict_frames.keys():
