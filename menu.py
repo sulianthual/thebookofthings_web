@@ -1398,6 +1398,13 @@ class obj_scene_instructions_controls_screen(page.obj_chapterpage):
         self.addpart( draw.obj_textbox('play',(501,438),color=share.colors.instructions,fontsize='larger') )
         self.addpart( draw.obj_textbox('exit',(136,325),color=share.colors.instructions,fontsize='larger') )
         #
+        ## NEW
+        self.addpart( draw.obj_textbox('[tab]',(153,529),color=share.colors.black) )
+        self.addpart( draw.obj_textbox('previous page',(156,575),color=share.colors.instructions) )
+        self.addpart( draw.obj_textbox('[enter]',(953,529),color=share.colors.black) )
+        self.addpart( draw.obj_textbox('next page',(956,575),color=share.colors.instructions) )
+
+        #
         self.sprite_keyboard=draw.obj_textbox('xxx',(640,140),hover=True)
         self.addpart(self.sprite_keyboard)
         if self.doazertymode:

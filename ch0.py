@@ -318,8 +318,10 @@ class obj_scene_ch0p13(page.obj_chapterpage):
         self.addpart( draw.obj_textbox('exit',(136,325),color=share.colors.instructions,fontsize='larger') )
         #
         ## NEW
-        self.addpart( draw.obj_textbox('[tab]',(153,449),color=share.colors.black) )
-        self.addpart( draw.obj_textbox('previous page',(153,349),color=share.colors.instructions,fontsize='larger') )
+        self.addpart( draw.obj_textbox('[tab]',(153,529),color=share.colors.black) )
+        self.addpart( draw.obj_textbox('previous page',(156,575),color=share.colors.instructions) )
+        self.addpart( draw.obj_textbox('[enter]',(953,529),color=share.colors.black) )
+        self.addpart( draw.obj_textbox('next page',(956,575),color=share.colors.instructions) )
 
         #
         animation1=draw.obj_animation('ch0_bookinstructions','book',(640,360),record=False)
