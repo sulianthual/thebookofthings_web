@@ -1027,7 +1027,7 @@ class obj_scene_chaptersscreen(obj_scene_realtitlescreen):
 
     def page(self,controls):
         # hovers
-        if self.sprite_back.isclicked(controls):
+        if self.sprite_back.isclicked(controls) or (controls.tab and controls.tabc):
             self.sound_menuback.play()
             share.scenemanager.switchscene(share.titlescreen,initstart=True)# go back to menu
         if True:
@@ -1145,7 +1145,7 @@ class obj_scene_chapterpartsscreen(obj_scene_realtitlescreen):
 
     def page(self,controls):
         # hovers
-        if self.sprite_back.isclicked(controls):
+        if self.sprite_back.isclicked(controls) or (controls.tab and controls.tabc):
             self.sound_menuback.play()
             share.scenemanager.switchscene(obj_scene_chaptersscreen())# back to chapters
         #
@@ -1262,7 +1262,7 @@ class obj_scene_settings(obj_scene_realtitlescreen):
 
     def page(self,controls):
         # go back
-        if self.sprite_back.isclicked(controls):
+        if self.sprite_back.isclicked(controls) or (controls.tab and controls.tabc):
             self.sound_menuback.play()
             share.scenemanager.switchscene(share.titlescreen,initstart=True)# go back to menu
         #
