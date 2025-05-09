@@ -924,7 +924,8 @@ class obj_scene_realtitlescreen(page.obj_page):
             elif self.sprite_exit.isclicked(controls):
                 share.quitgame()
         else:
-            if self.sprite_chapters.isclicked(controls):
+            # if self.sprite_chapters.isclicked(controls):
+            if self.sprite_chapters.isclicked(controls) or (controls.enter and controls.enterc):# WEB
                 self.sound_menugo.play()
                 share.scenemanager.switchscene(obj_scene_chaptersscreen())# chapters
             elif self.sprite_settings.isclicked(controls):
@@ -1074,6 +1075,15 @@ class obj_scene_chaptersscreen(obj_scene_realtitlescreen):
                 self.sound_menugo.play()
                 share.scenemanager.switchscene(ch8.obj_scene_chapter8())# go directly, there is only one bookmark
                 # share.scenemanager.switchscene(obj_scene_chapterpartsscreen(chapter=8))
+        #
+        # WEB
+        if controls.enter and controls.enterc:
+            self.sound_menugo.play()
+            if self.maxchapter>7:
+                share.scenemanager.switchscene(ch8.obj_scene_chapter8())
+            else:
+                share.scenemanager.switchscene(obj_scene_chapterpartsscreen(chapter=self.maxchapter))
+
 
 
 ####################################################################################################################

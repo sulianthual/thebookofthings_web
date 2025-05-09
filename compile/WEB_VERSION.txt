@@ -10,9 +10,10 @@ modified code, 60 FPS to 20 FPS:
 - other modifs i dont remember maybe
 
 Added controls for page browsing (see page.py, chapter_page):
-- Enter=next, tab=previous.
+- Enter=next, tab=previous. Can now browse all pages freely
 - Modified control display page (ch0 and menu)
 - may now skip some games, beware if logic still ok
+- menu.py: enter now goes to chapter page, Enter again goes to last available chapter
 
 Making the build:
 https://github.com/pygame-web/pygbag
